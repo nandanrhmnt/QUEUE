@@ -1,0 +1,133 @@
+#include <iostream>
+using namespace std;
+
+  //inisialisasi
+  int queue = 5; 
+  int front = 0;
+  int back = 0;
+  string dataNama[5];
+    
+   //pengecekakn jika data queue penuh
+    bool isFull()
+    {
+      if(back == queue ){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
+    //pengecekakn jika data queue kosong
+    bool isEmpty()
+    {
+      if( back == 0 ){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
+    
+    //penambahan data antrian
+    void enqueue(string name ){
+    
+      if( isFull() ){
+        cout << "Antrian Penuh!!" << endl;
+      }else{
+        // cek apakah datanya kosong atau tidak
+        if( isEmpty() ){
+          //jika kosong, data kan ditambahkan  
+          dataNama[0] = name;
+          front++;
+          back++;
+        }else{
+          //jika tidak kosong data akan ditambahakn dibagian back(belakang)
+          dataNama[back] = name;
+          back++;
+        }
+      }
+    
+    }
+    
+    //penghapusan data depan pada queue
+    void dequeue(){
+      if( isEmpty() ){
+        cout << "Antrian kosong!!" << endl;
+      }else{
+        for( int i = 0; i < back; i++ ){
+          dataNama[i] = dataNama[i+1];
+        }
+        back--;
+      }
+    }
+    
+    //menghitung banyak data yang ada
+    int countQueue(){
+    
+      if( isEmpty() ){
+        return 0;
+      }else if( isFull() ){
+        return queue;
+      }else{
+        return back;
+      }
+    
+    }
+    
+    //menghapus semua data/element yg ada
+    void destroyQueue(){
+      if( isEmpty() ){
+        cout << "Antrian Kosong!!" << endl;
+      }else{
+        for( int i = 0; i < queue; i++ ){         
+          if( back > 1 ){
+            dataNama[back - 1];
+            back--;
+          }else if( back == 1 ){
+            dataNama[back - 1];
+            back = 0;
+            front = 0;
+          }  
+        }
+      }
+    }
+    
+    
+    // menampilkan data 
+    void printQueue(){
+      cout<< "-------------------- Nama Antrian -------------------- "<<endl;
+      cout << "Total Nama Antrian : " << countQueue() << " Nama" << endl;
+      if( isEmpty() ){
+        cout << "Data Antrian Kosong!!" << endl;
+      }else{
+        for( int i = 0; i < queue; i++ ){
+          if(dataNama[i] != ""){
+            cout << dataNama[i]<<endl;
+          }
+      }
+      cout << "\n" << endl;
+    }
+    }
+    
+    int main(){
+        enqueue("yanto");
+        printQueue();
+    
+        enqueue("yanti");
+        printQueue();
+
+        enqueue("udin");
+        printQueue();
+
+        enqueue("asep");
+        printQueue();
+    
+        enqueue("alex");
+        printQueue();
+
+        enqueue("serah");
+        printQueue();
+
+        dequeue();
+        printQueue();
+    }
